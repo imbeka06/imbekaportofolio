@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imbeka Musa - tech Visionary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon: #0ff;
+            --matrix: #0f0;
+            --cyber: #ff003c;
+            --hacker: #2A2A2A;
+            --space: #000022;
+            --glow: 0 0 20px var(--neon), 0 0 40px var(--neon), 0 0 60px var(--neon);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle, var(--space), #000);
+            color: white;
+            overflow: hidden;
+            perspective: 2000px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Glowing Background */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent);
+            animation: glowPulse 5s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes glowPulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.2); opacity: 0.6; }
+        }
+
+        /* Dashboard Navigation */
+        .dashboard {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(0, 0, 34, 0.9);
+            border: 1px solid var(--neon);
+            border-radius: 30px;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glow);
+        }
+
+        .dashboard-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .dashboard-nav a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: 0.3s;
+        }
+
+        .dashboard-nav a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--neon);
+            transition: 0.3s;
+        }
+
+        .dashboard-nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Page Container */
+        .page-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 8rem 2rem 2rem;
+            overflow-y: auto;
+        }
+
+        .page-container.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: pageFade 0.5s ease;
+        }
+
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .home-page {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid var(--neon);
+            box-shadow: var(--glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: bold;
+            background: rgba(0, 0, 34, 0.9);
+            color: var(--neon);
+            margin: 2rem auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .home-page h1 {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--neon), var(--cyber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: var(--glow); }
+            50% { text-shadow: 0 0 30px var(--neon), 0 0 50px var(--neon); }
+        }
+
+        /* Projects Page */
+        .projects-page {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quantum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .quantum-card {
+            background: rgba(0, 0, 34, 0.9);
+            border: 1px solid var(--neon);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .quantum-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+        }
+
+        /* Skills Page */
+        .skills-page {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-node {
+            background: rgba(0, 0, 34, 0.9);
+            border: 1px solid var(--matrix);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .skill-node:hover {
+            transform: scale(1.1);
+            box-shadow: var(--glow);
+        }
+
+        /* Contact Page */
+        .contact-page {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hologram-form {
+            padding: 3rem;
+            background: rgba(0, 0, 34, 0.9);
+            border: 1px solid var(--cyber);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .hologram-form::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon), var(--cyber), var(--matrix));
+            z-index: -1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .transmission-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--neon);
+            font-size: 2rem;
+            text-shadow: var(--glow);
+            opacity: 0;
+            animation: transmitGlow 2s;
+        }
+
+        @keyframes transmitGlow {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <!-- Dashboard Navigation -->
+    <div class="dashboard">
+        <nav class="dashboard-nav">
+            <a href="#home">// HOME</a>
+            <a href="#projects">// PROJECTS</a>
+            <a href="#skills">// SKILLS</a>
+            <a href="#contact">// CONTACT</a>
+        </nav>
+    </div>
+
+    <!-- Home Page -->
+    <div class="page-container active" id="home-page">
+        <div class="home-page">
+            <div class="logo-circle">IM</div>
+            <h1>IMBEKA MUSA</h1>
+            <p>Software Engineering Student</p>
+            <p>Pursuing Bachelor's Degree in Mathematics and Computer Science at</p>
+            <p>Jomo Kenyatta University of Agriculture and Technology</p>
+            <p>Third Year Student</p>
+        </div>
+    </div>
+
+    <!-- Projects Page -->
+    <div class="page-container" id="projects-page">
+        <div class="projects-page">
+            <h2 class="cyber-header">IMBEKA Projects</h2>
+            <div class="quantum-grid">
+                <div class="quantum-card">
+                    <h3>Math Game Project</h3>
+                    <p>Interactive educational game for learning mathematics</p>
+                </div>
+                <div class="quantum-card">
+                    <h3>ATM Simulation</h3>
+                    <p>Banking system simulation with secure transactions</p>
+                </div>
+                <div class="quantum-card">
+                    <h3>E-Commerce Website</h3>
+                    <p>Full-stack business to commerce platform</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Page -->
+    <div class="page-container" id="skills-page">
+        <div class="skills-page">
+            <h2 class="cyber-header">Technical Arsenal</h2>
+            <div class="skill-matrix">
+                <div class="skill-node">
+                    <h3>Programming Languages</h3>
+                    <p>C, C++, Java, Python, R, Html,CSS,JavaScript</p>
+                </div>
+                <div class="skill-node">
+                    <h3>Web Development</h3>
+                    <p>HTML, CSS, JavaScript, React</p>
+                </div>
+                <div class="skill-node">
+                    <h3>Data Structures & Algorithms</h3>
+                    <p>Advanced problem-solving skills</p>
+                </div>
+                <div class="skill-node">
+                    <h3>Mathematical Expertise</h3>
+                    <p>Linear Algebra, Calculus, Odinary Differential Equations, Statistics,Applied mathematics</p>
+                </div>
+                <div class="skill-node">
+                    <h3>Technical Tools</h3>
+                    <p>MATLAB, Git, Linux, Docker</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="page-container" id="contact-page">
+        <div class="contact-page">
+            <h2 class="cyber-header">Transmission Hub</h2>
+            <form class="hologram-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="_replyto" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Encrypted Message" required></textarea>
+                <button type="submit" class="cyber-button">
+                    <i class="fas fa-paper-plane"></i> Send Transmission
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="transmission-success" id="success-message">TRANSMISSION SUCCESSFUL!</div>
+
+    <script src="script.js">
+        // Page routing system
+        const pages = {
+            'home': document.getElementById('home-page'),
+            'projects': document.getElementById('projects-page'),
+            'skills': document.getElementById('skills-page'),
+            'contact': document.getElementById('contact-page')
+        };
+
+        function showPage(pageId) {
+            Object.values(pages).forEach(page => page.classList.remove('active'));
+            pages[pageId].classList.add('active');
+        }
+
+        // Handle dashboard navigation
+        document.querySelectorAll('.dashboard-nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('href').substring(1);
+                showPage(pageId);
+            });
+        });
+
+        // Handle initial page load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && pages[hash]) {
+                showPage(hash);
+            }
+        });
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.substring(1);
+            showPage(hash || 'home');
+        });
+
+        // Email form handling
+        const form = document.querySelector('.hologram-form');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    successMessage.style.animation = 'none';
+                    void successMessage.offsetWidth; // Trigger reflow
+                    successMessage.style.animation = 'transmitGlow 2s';
+                    form.reset();
+                }
+            } catch (error) {
+                console.error('Transmission failed:', error);
+            }
+        });
+    </script>
+</body>
+</html>
